@@ -7,14 +7,14 @@ postgresql_connection_info = {
     password: node['postgresql']['password']['postgres']
 }
 
-default["chef-create-db"]["postgresql"]["databases"].each do |opt|
+node["chef-create-db"]["postgresql"]["databases"].each do |opt|
   postgresql_database opt["name"] do
     connection postgresql_connection_info
     action :create
   end
 end
 
-default["chef-create-db"]["postgresql"]["users"].each do |opt|
+node["chef-create-db"]["postgresql"]["users"].each do |opt|
 
   postgresql_database_user opt["name"] do
     connection    postgresql_connection_info
@@ -22,7 +22,7 @@ default["chef-create-db"]["postgresql"]["users"].each do |opt|
     action        :create
   end
 
-  postgresql_database_user 'nortex' do
+  postgresql_database_user opt["name"] do
     connection    postgresql_connection_info
     database_name opt["db"]
     host          '%'
