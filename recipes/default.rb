@@ -10,6 +10,7 @@ postgresql_connection_info = {
 node["chef-create-db"]["postgresql"]["databases"].each do |opt|
   postgresql_database opt["name"] do
     connection postgresql_connection_info
+    encoding 'UTF-8'
     action :create
   end
 end
