@@ -20,6 +20,7 @@ node["chef-create-db"]["postgresql"]["users"].each do |opt|
   postgresql_database_user opt["name"] do
     connection    postgresql_connection_info
     password      opt["password"]
+    superuser     true
     action        :create
   end
 
